@@ -45,8 +45,7 @@ const userSchema = new Schema(
     },
     imageURL: {
       type: String,
-      default:
-        "https://res.cloudinary.com/dzbevpbos/image/upload/v1684831673/Photo_default_pzeg2t.png",
+      default: "",
     },
     favorite: {
       type: Array,
