@@ -2,7 +2,7 @@ const { HttpError } = require("../../helpers");
 const { User } = require("../../models");
 const { ctrlWrapper } = require("../../utils");
 
-const addNoticeToFavorite = async (req, res) => {
+const addNoticeToFavorites = async (req, res) => {
   const { id } = req.params;
   const { _id } = req.user;
   const user = await User.findById(_id);
@@ -23,4 +23,4 @@ const addNoticeToFavorite = async (req, res) => {
   });
 };
 
-module.exports = { addNoticeToFavorite: ctrlWrapper(addNoticeToFavorite) };
+module.exports = { addNoticeToFavorites: ctrlWrapper(addNoticeToFavorites) };

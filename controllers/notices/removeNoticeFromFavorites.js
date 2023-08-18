@@ -2,7 +2,7 @@ const { HttpError } = require("../../helpers");
 const { User } = require("../../models");
 const { ctrlWrapper } = require("../../utils");
 
-const removeNoticeFromFavorite = async (req, res) => {
+const removeNoticeFromFavorites = async (req, res) => {
   const { id } = req.params;
   const { _id } = req.user;
   const user = await User.findById(_id);
@@ -10,7 +10,7 @@ const removeNoticeFromFavorite = async (req, res) => {
     throw HttpError(404, `User with  id "${id}" not found `);
   }
   if (!user.favorite.includes(id)) {
-    throw HttpError(409, `Notices with id "${id}" not found in your favorite`);
+    throw HttpError(409, `Notices with id "${id}" not found in your favorites`);
   }
   user.favorite.pull(id);
   await user.save();
@@ -20,5 +20,5 @@ const removeNoticeFromFavorite = async (req, res) => {
 };
 
 module.exports = {
-  removeNoticeFromFavorite: ctrlWrapper(removeNoticeFromFavorite),
+  removeNoticeFromFavorites: ctrlWrapper(removeNoticeFromFavorites),
 };

@@ -1,9 +1,11 @@
-const handleMongooseError = require("./handleMongooseError");
-const validateBody = require("./validateBody");
 const ctrlWrapper = require("./ctrlWrapper");
+const validateBody = require("./validateBody");
+const handleMongooseError = require("./handleMongooseError");
+const cloudinary = require("./cloudinary");
 
 module.exports = {
-  handleMongooseError,
-  validateBody,
   ctrlWrapper,
+  validateBody,
+  handleMongooseError,
+  cloudinary,
 };

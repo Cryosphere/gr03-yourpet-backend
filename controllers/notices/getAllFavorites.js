@@ -1,7 +1,7 @@
 const { Notices } = require("../../models");
 const { ctrlWrapper } = require("../../utils");
 
-const getAllFavorite = async (req, res) => {
+const getAllFavorites = async (req, res) => {
   const user = req.user;
   const { searchValue, page = 1, limit = 10, sex } = req.query;
   const skip = (page - 1) * limit;
@@ -28,4 +28,4 @@ const getAllFavorite = async (req, res) => {
   res.status(200).json({ notices, totalPages, page });
 };
 
-module.exports = { getAllFavorite: ctrlWrapper(getAllFavorite) };
+module.exports = { getAllFavorites: ctrlWrapper(getAllFavorites) };

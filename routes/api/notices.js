@@ -1,7 +1,6 @@
 const express = require("express");
 
 const { notices } = require("../../controllers");
-
 const { validateBody } = require("../../utils");
 
 const router = express.Router();
@@ -26,19 +25,19 @@ router.get("/user/own", authenticate, notices.getAllOwnNotices);
 router.delete("/:id", isValidId, authenticate, notices.deleteOwnNoticeById);
 
 router.patch(
-  "/favorite/add/:id",
+  "/favorites/add/:id",
   authenticate,
   isValidId,
-  notices.addNoticeToFavorite
+  notices.addNoticeToFavorites
 );
 
 router.patch(
-  "/favorite/remove/:id",
+  "/favorites/remove/:id",
   authenticate,
   isValidId,
-  notices.removeNoticeFromFavorite
+  notices.removeNoticeFromFavorites
 );
 
-router.get("/favorite/all", authenticate, notices.getAllFavorite);
+router.get("/favorites/all", authenticate, notices.getAllFavorites);
 
 module.exports = router;

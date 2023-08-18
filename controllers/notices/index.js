@@ -3,9 +3,9 @@ const { getNoticesById } = require("./getNoticesById");
 const { getNotices } = require("./getNotices");
 const { getAllOwnNotices } = require("./getAllOwnNotices");
 const { deleteOwnNoticeById } = require("./deleteOwnNoticeById");
-const { addNoticeToFavorite } = require("./addNoticeToFavorite");
-const { removeNoticeFromFavorite } = require("./removeNoticeFromFavorite");
-const { getAllFavorite } = require("./getAllFavorite");
+const { addNoticeToFavorites } = require("./addNoticeToFavorites");
+const { removeNoticeFromFavorites } = require("./removeNoticeFromFavorites");
+const { getAllFavorites } = require("./getAllFavorites");
 
 module.exports = {
   addNoticesToCategory,
@@ -13,7 +13,7 @@ module.exports = {
   getNotices,
   getAllOwnNotices,
   deleteOwnNoticeById,
-  addNoticeToFavorite,
-  removeNoticeFromFavorite,
-  getAllFavorite,
+  addNoticeToFavorites,
+  removeNoticeFromFavorites,
+  getAllFavorites,
 };
