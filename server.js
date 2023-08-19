@@ -9,7 +9,6 @@ const { DB_HOST, PORT = 3001 } = process.env;
 mongoose.set("strictQuery", true);
 
 const tempDir = path.join(process.cwd(), "tmp");
-const avatarsDir = path.join(process.cwd(), "public", "avatars");
 
 const isAccessible = (path) => {
   return fs
@@ -30,7 +29,6 @@ mongoose
   .then(() =>
     app.listen(PORT, async () => {
       createFolderIsNotExist(tempDir);
-      createFolderIsNotExist(avatarsDir);
       console.log(`Server running. Use our API on port: ${PORT}`);
     })
   )
