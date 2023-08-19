@@ -66,12 +66,11 @@ const userSchema = new Schema(
 userSchema.post("save", handleMongooseError);
 
 const registerSchema = Joi.object({
-  // name: Joi.string().min(2).pattern(nameRegexp).required().messages({
-  //   "any.required": `"name" is required`,
-  //   "string.empty": `"name" cannot be an empty field`,
-  //   "string.base": `"name" must be string`,
-  //   "string.min": `"name" should have a minimum length of 2`,
-  // }),
+  name: Joi.string().min(2).pattern(nameRegexp).messages({
+    "string.empty": `"name" cannot be an empty field`,
+    "string.base": `"name" must be string`,
+    "string.min": `"name" should have a minimum length of 2`,
+  }),
   email: Joi.string().pattern(emailRegexp).min(10).max(63).required().messages({
     "any.required": `"email" is required`,
     "string.empty": `"email" cannot be an empty field`,

@@ -22,7 +22,7 @@
       "description": "Operations with news"
     },
     {
-      "name": "Services",
+      "name": "Sponsors",
       "description": "Operations with our partners"
     },
     {
@@ -258,11 +258,11 @@
         }
       }
     },
-    "/services": {
+    "/sponsors": {
       "get": {
-        "tags": ["Services"],
-        "summary": "Get all Services",
-        "description": "Get all Services",
+        "tags": ["Sponsors"],
+        "summary": "Get all sponsors",
+        "description": "Get all sponsors",
         "parameters": [],
         "responses": {
           "200": {
@@ -272,7 +272,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ServicesResponse"
+                    "$ref": "#/components/schemas/SponsorsResponse"
                   }
                 }
               }
@@ -1186,7 +1186,7 @@
           "totalPages": 1
         }
       },
-      "ServicesResponse": {
+      "SponsorsResponse": {
         "type": "object",
         "properties": {
           "_id": {
