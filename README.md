@@ -27,7 +27,7 @@ YourPet Backend API is built using the following tools:
 To install YourPet Backend API, follow these steps:
 
 1. Open a terminal and clone the YourPet Backend API repository to your local machine using `git clone https://github.com/Cryosphere/gr03-yourpet-backend.git`.
-2. Navigate to the project directory using `cd YourPet-backend`.
+2. Navigate to the project directory using `cd gr03-yourpet-backend`.
 3. Install dependencies using `npm install`.
 
 ## Configuration
