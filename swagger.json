@@ -8,7 +8,7 @@
   "consumes": ["application/json", "multipart/form-data"],
   "produces": ["application/json"],
   "servers": [
-    { "url": "https://your-pet-xqzt.onrender.com" },
+    { "url": "https://your-pet-xqzt.onrender.com/api" },
     { "url": "http://localhost:3001/api" }
     
   ],
