@@ -16,7 +16,6 @@ const userSchema = new Schema(
     name: {
       type: String,
       match: nameRegexp,
-      required: [true, "Email is required"],
     },
     email: {
       type: String,
@@ -45,7 +44,8 @@ const userSchema = new Schema(
     },
     imageURL: {
       type: String,
-      default: "",
+      default:
+        "https://res.cloudinary.com/dzmcgfrq3/image/upload/v1692434665/Photo_default_lmlyo3.png",
     },
     favorite: {
       type: Array,
