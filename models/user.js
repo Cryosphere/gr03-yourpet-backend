@@ -16,7 +16,6 @@ const userSchema = new Schema(
     name: {
       type: String,
       match: nameRegexp,
-      required: [true, "Email is required"],
     },
     email: {
       type: String,
@@ -45,7 +44,8 @@ const userSchema = new Schema(
     },
     imageURL: {
       type: String,
-      default: "",
+      default:
+        "https://res.cloudinary.com/dzmcgfrq3/image/upload/v1692434665/Photo_default_lmlyo3.png",
     },
     favorite: {
       type: Array,
@@ -66,12 +66,12 @@ const userSchema = new Schema(
 userSchema.post("save", handleMongooseError);
 
 const registerSchema = Joi.object({
-  name: Joi.string().min(2).pattern(nameRegexp).required().messages({
-    "any.required": `"name" is required`,
-    "string.empty": `"name" cannot be an empty field`,
-    "string.base": `"name" must be string`,
-    "string.min": `"name" should have a minimum length of 2`,
-  }),
+  // name: Joi.string().min(2).pattern(nameRegexp).required().messages({
+  //   "any.required": `"name" is required`,
+  //   "string.empty": `"name" cannot be an empty field`,
+  //   "string.base": `"name" must be string`,
+  //   "string.min": `"name" should have a minimum length of 2`,
+  // }),
   email: Joi.string().pattern(emailRegexp).min(10).max(63).required().messages({
     "any.required": `"email" is required`,
     "string.empty": `"email" cannot be an empty field`,
