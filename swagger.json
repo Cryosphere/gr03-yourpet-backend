@@ -8,8 +8,8 @@
   "consumes": ["application/json", "multipart/form-data"],
   "produces": ["application/json"],
   "servers": [
-    { "url": "http://localhost:3001/api" }
-    
+    { "url": "http://localhost:3001/api" },
+    { "url": "https://your-pet-xqzt.onrender.com" }
   ],
   "tags": [
     {
