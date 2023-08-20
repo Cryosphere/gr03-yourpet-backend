@@ -55,7 +55,7 @@ const petValidationSchema = Joi.object({
     "string.empty": `"breed" cannot be empty`,
   }),
   comments: Joi.string(),
-  imageURL: Joi.string().uri(),
+  imageURL: Joi.string().pattern(urlRegexp).uri(),
 });
 
 const MyPet = model("pets", petSchema);
