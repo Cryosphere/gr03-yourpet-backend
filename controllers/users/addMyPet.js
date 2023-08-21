@@ -5,8 +5,8 @@ const { cloudinaryAddImage } = require("../../middlewares");
 const addMyPet = async (req, res, next) => {
   const { _id: owner } = req.user;
   let imageURL;
-  if (req.body.file) {
-    const photo = await cloudinaryAddImage(req.body.file);
+  if (req.file) {
+    const photo = await cloudinaryAddImage(req.file);
     imageURL = photo.secure_url;
   } else {
     imageURL = "";

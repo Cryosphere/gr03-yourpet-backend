@@ -19,7 +19,7 @@ router.post(
   "/pets",
   authenticate,
   validateBody(petValidationSchema),
-  upload.single("file"),
+  upload.single("imageUrl"),
   ctrlWrapper(users.addMyPet)
 );
 router.delete(
