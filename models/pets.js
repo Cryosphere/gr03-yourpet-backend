@@ -1,62 +1,84 @@
 const { Schema, model } = require("mongoose");
-const { handleMongooseError } = require("../utils");
 const Joi = require("joi");
+const { handleMongooseError } = require("../utils");
 
-const nameRegexp = /^[a-zA-Z\s]*$/;
-const birthdayRegexp =
+const dateRegexp =
   /^\s*(3[01]|[12][0-9]|0?[1-9])\.(1[012]|0?[1-9])\.((?:19|20)\d{2})\s*$/;
-const breedRegexp = /^(?=.{2,16}$)([A-Za-z])*$/;
-const urlRegexp = /^(https?:\/\/)?([\w.-]+\.[a-zA-Z]{2,})(\/\S*)?$/;
 
-const petSchema = new Schema({
-  name: {
-    type: String,
-    required: [true, "Set name please"],
-    match: nameRegexp,
-    minLength: 2,
-    maxLength: 16,
+const myPetSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: [true, "Set name of your pet"],
+      minLength: 2,
+      maxLength: 16,
+    },
+    birthday: {
+      type: String,
+      required: [true, "Set birthday of your pet"],
+      match: dateRegexp,
+    },
+    breed: {
+      type: String,
+      required: [true, "Set breed of your pet"],
+      minLength: 2,
+      maxLength: 16,
+    },
+    imageURL: {
+      type: String,
+      default:
+        "https://res.cloudinary.com/dzbevpbos/image/upload/v1684832832/default-pets_z1kxoq_elq6gv.png",
+    },
+    comments: {
+      type: String,
+      required: false,
+      minLength: 8,
+      maxLength: 1000,
+    },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+      required: true,
+    },
   },
-  birthday: {
-    type: String,
-    match: birthdayRegexp,
-    required: true,
-  },
-  breed: {
-    type: String,
-    required: [true, "Set breed please"],
-    match: breedRegexp,
-    minLength: 2,
-    maxLength: 16,
-  },
-  owner: {
-    type: Schema.Types.ObjectId,
-    ref: "user",
-  },
-  comments: String,
-  imageURL: {
-    type: String,
-    match: urlRegexp,
-  },
+  {
+    versionKey: false,
+    timestamps: true,
+  }
+);
+
+myPetSchema.post("save", handleMongooseError);
+
+const MyPet = model("pet", myPetSchema);
+
+const addMyPetSchema = Joi.object({
+  name: Joi.string().required().min(2).max(16).messages({
+    "string.base": `"name" should be a type of 'text'`,
+    "string.empty": `"name" cannot be an empty field`,
+    "any.required": `"name" is a required field`,
+  }),
+  birthday: Joi.string().required().pattern(dateRegexp).messages({
+    "string.base": `"birthday" should be a type of 'number'`,
+    "number.empty": `"birthday" cannot be an empty field`,
+    "any.required": `"birthday" is a required field`,
+  }),
+  breed: Joi.string().required().min(2).max(16).messages({
+    "string.base": `"breed" should be a type of 'text'`,
+    "string.empty": `"breed" cannot be an empty field`,
+    "any.required": `"breed" is a required field`,
+  }),
+  imageURL: Joi.string().optional(),
+  comments: Joi.string().min(8).max(1000).messages({
+    "string.base": `"comments" should be a type of 'text'`,
+    "any.required": `"comments" is a required field`,
+  }),
 });
 
-petSchema.post("save", handleMongooseError);
+const schemas = {
+  addMyPetSchema,
+};
 
-const petValidationSchema = Joi.object({
-  // name: Joi.string().required(),
-  // birthday: Joi.string().required(),
-  // breed: Joi.string().required(),
-  name: Joi.string().pattern(nameRegexp).min(2).max(16).required().messages({
-    "any.required": `missing required "name"`,
-    "string.empty": `"name" cannot be empty`,
-  }),
-  birthday: Joi.string().pattern(birthdayRegexp).required(),
-  breed: Joi.string().pattern(breedRegexp).min(2).max(16).required().messages({
-    "any.required": `missing required "breed"`,
-    "string.empty": `"breed" cannot be empty`,
-  }),
-  comments: Joi.string(),
-  imageURL: Joi.string().pattern(urlRegexp).uri(),
-});
-
-const MyPet = model("pets", petSchema);
-module.exports = { MyPet, petValidationSchema };
+module.exports = {
+  MyPet,
+  schemas,
+};

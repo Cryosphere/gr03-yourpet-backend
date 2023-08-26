@@ -5,9 +5,7 @@ const { HttpError } = require("../../helpers/HttpError");
 
 const addNoticesToCategory = async (req, res) => {
   const { _id } = req.user;
-  console.log(req.body);
-  const file = await cloudinaryAddImage(req.file);
-  console.log(req.file);
+  const file = await cloudinaryAddImage(req.file.path);
   const result = await Notices.create({
     ...req.body,
     owner: _id,

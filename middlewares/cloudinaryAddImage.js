@@ -1,18 +1,14 @@
 const { cloudinary } = require("../utils");
 const fs = require("fs/promises");
 const Jimp = require("jimp");
-const path = require("path");
 
-const cloudinaryAddImage = async (file) => {
+const cloudinaryAddImage = async (path) => {
   try {
-    console.log(path);
-    const tempDir = path.join(__dirname, "../", "tmp", file);
-    console.log(tempDir);
-    const resizeImg = await Jimp.read(tempDir);
+    const resizeImg = await Jimp.read(path);
     resizeImg.cover(450, 450);
-    await resizeImg.writeAsync(tempDir);
-    const result = await cloudinary.uploader.upload(tempDir);
-    fs.unlink(tempDir);
+    await resizeImg.writeAsync(path);
+    const result = await cloudinary.uploader.upload(path);
+    fs.unlink(path);
     return result;
   } catch (error) {
     throw new Error(error.message);

@@ -2,7 +2,7 @@ const { User, userSchemas } = require("./user");
 const { News } = require("./news");
 const { Notices, schemasNotices } = require("./notices");
 const { Sponsors } = require("./sponsors");
-const { MyPet, petValidationSchema } = require("./pets");
+const { MyPet, schemas } = require("./pets");
 
 module.exports = {
   User,
@@ -12,5 +12,5 @@ module.exports = {
   schemasNotices,
   Sponsors,
   MyPet,
-  petValidationSchema,
+  schemas,
 };
