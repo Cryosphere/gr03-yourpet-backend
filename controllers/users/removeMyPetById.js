@@ -1,6 +1,6 @@
 const { ctrlWrapper } = require("../../utils");
 const { MyPet } = require("../../models");
-const { HttpError } = require("../../helpers")
+const { HttpError } = require("../../helpers");
 
 const removeMyPetById = async (req, res, next) => {
   const { id } = req.params;

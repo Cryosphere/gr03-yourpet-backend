@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const { handleMongooseError } = require("../utils");
 
-const sponsorsSchema = new Schema(
+const servicesSchema = new Schema(
   {
     title: {
       type: String,
@@ -35,7 +35,8 @@ const sponsorsSchema = new Schema(
   }
 );
 
-sponsorsSchema.post("save", handleMongooseError);
+servicesSchema.post("save", handleMongooseError);
 
 const Sponsors = model("services", sponsorsSchema);
 module.exports = { Sponsors };
+

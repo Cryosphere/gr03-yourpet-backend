@@ -1,32 +1,36 @@
 const express = require("express");
-const { ctrlWrapper } = require("../../utils");
-const { users } = require("../../controllers");
+const { users: controllers } = require("../../controllers");
 const { validateBody } = require("../../utils");
 
 const router = express.Router();
 
-const { userSchemas, petValidationSchema } = require("../../models");
-const { authenticate, upload, isValidId } = require("../../middlewares");
+const { schemas, userSchemas } = require("../../models");
 
-router.get("/", authenticate, ctrlWrapper(users.getAllInfo));
-router.patch(
-  "/",
-  authenticate,
-  validateBody(userSchemas.updateUserSchema),
-  ctrlWrapper(users.updateUser)
-);
+const { isValidId, authenticate, upload } = require("../../middlewares");
+
 router.post(
   "/pets",
   authenticate,
-  validateBody(petValidationSchema),
-  upload.single("imageUrl"),
-  ctrlWrapper(users.addMyPet)
+  upload.single("imageURL"),
+  validateBody(schemas.addMyPetSchema),
+  controllers.addMyPet
 );
+
 router.delete(
   "/pets/:id",
   authenticate,
   isValidId,
-  ctrlWrapper(users.removeMyPetById)
+  controllers.removeMyPetById
+);
+
+router.get("/", authenticate, controllers.getAllInfo);
+
+router.patch(
+  "/",
+  authenticate,
+  upload.single("imageURL"),
+  validateBody(userSchemas.updateUserSchema),
+  controllers.updateUser
 );
 
 module.exports = router;

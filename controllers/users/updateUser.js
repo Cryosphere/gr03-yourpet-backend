@@ -6,8 +6,8 @@ const updateUser = async (req, res) => {
   const { _id } = req.user;
 
   let updatedFields = { ...req.body };
-  if (req.body.file) {
-    const imageURL = await cloudinaryAddImage(req.body.file);
+  if (req.file) {
+    const imageURL = await cloudinaryAddImage(req.file.path);
     updatedFields.imageURL = imageURL.secure_url;
   }
 

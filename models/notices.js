@@ -61,9 +61,6 @@ const noticesSchema = new Schema(
     },
     price: {
       type: Number,
-      required: function () {
-        return this.category === "sell";
-      },
       min: [0],
     },
     comments: {
