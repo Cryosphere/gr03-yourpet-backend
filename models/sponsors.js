@@ -39,4 +39,3 @@ servicesSchema.post("save", handleMongooseError);
 
 const Sponsors = model("services", servicesSchema);
 module.exports = { Sponsors };
-

@@ -290,30 +290,50 @@
       }
     },
 
-     "/user/info": {
+      
+     "/user": {
+      "get": {
+        "tags": ["User"],
+        "security": [{ "Bearer": [] }],
+        "summary": "Get all the information about the user and his pets",
+
+        "parameters": [
+         
+        ],
+        "responses": {
+          "200": {
+            "description": "Information fetched successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                      "$ref": "#/components/schemas/GetUserInfoResponse"
+                    
+                  }
+                }
+              }
+            },
+                  "401": {
+            "description": "Not authorized"
+          },
+          "404": {
+            "description": "User not found"
+          }
+              
+      }},
       "patch": {
         "tags": ["User"],
         "summary": "Update user data",
         "description": "Update the user information with the provided fields. Requires authentication token.",
         "security": [{ "Bearer": [] }],
         "parameters": [
-          {
-            "in": "header",
-            "name": "Authorization",
-            "description": "Bearer token",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIi..."
-            }
-          }
+          
         ],
         "requestBody": {
           "description": "Update user object",
           "content": {
             "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateUserImgRequest"
+                "$ref": "#/components/schemas/UpdateUserRequest"
               }
             }
           }
@@ -321,8 +341,11 @@
         "responses": {
           "200": {
             "description": "Successful operation",
-            "content": {}
-          },
+            "content": {"multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserResponse"
+              }}
+          }},
           "400": {
             "description": "Bad request",
             "content": {}
@@ -343,134 +366,79 @@
       }
     },
 
-    "/user/pets": {
-      "get": {
-        "summary": "Get user's pets",
-        "description": "Get user's pets. Requires authentication token.",
-        "tags": ["Pets"],
-        "security": [{ "Bearer": [] }],
-        "parameters": [
-          {
-            "in": "header",
-            "name": "Authorization",
-            "description": "Bearer token",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIi..."
-            }
-          }
-          
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "content": {}
-          },
-          "401": {
-            "description": "Not authorized",
-            "content": {}
-          },
-          "500": {
-            "description": "Server error",
-            "content": {}
-          }
-        }
-      },
+     "/user/pets": {
       "post": {
-        "summary": "Add user's pet",
-        "description": "Add user's pet. Requires authentication token.",
-        "tags": ["Pets"],
+        "tags": ["User"],
         "security": [{ "Bearer": [] }],
+        "summary": "Add a new pet",
         "parameters": [
-          {
-            "in": "header",
-            "name": "Authorization",
-            "description": "Bearer token",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIi..."
-            }
-          }
+        
         ],
         "requestBody": {
-          "description": "New pet's data object",
+          "description": "Pet`s object",
           "required": true,
           "content": {
             "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/CreatePetRequest"
+                "$ref": "#/components/schemas/AddPetRequest"
               }
             }
           }
         },
-
         "responses": {
           "201": {
-            "description": "Successful operation",
-            "content": {}
+            "description": "Pet successfully added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddPetResponse"
+                }
+              }
+            }
           },
           "400": {
-            "description": "Bad request (invalid request body)",
-            "content": {}
+            "description": "Bad request"
           },
           "401": {
-            "description": "Not authorized",
-            "content": {}
-          },
-          "500": {
-            "description": "Server error",
-            "content": {}
+            "description": "Unauthorized"
           }
         }
       }
     },
 
-    "/pets/{petId}": {
+    "/user/pets/:petId": {
       "delete": {
-        "summary": "Delete user's pet",
-        "description": "Delete user's pets. Requires authentication token.",
-        "tags": ["Pets"],
+        "tags": ["User"],
         "security": [{ "Bearer": [] }],
-        "parameters": [
+        "summary": "Delete pet by id",
+        "parameters":[ 
           {
-            "in": "header",
-            "name": "Authorization",
-            "description": "Bearer token",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIi..."
-            }
-          },
-          {
-            "in": "path",
             "name": "petId",
-            "description": "ID of the notice to get",
+            "in": "path",
+            "description": "Pet`s id",
             "required": true,
+            "style": "simple",
             "schema": {
-              "type": "string",
-              "example": "645e533389827094770e41f1"
+              "type": "string"
             }
-          }
-        ],
+          }]
+        ,
         "responses": {
-          "200": {
-            "description": "Successful operation",
-            "content": {}
+          "204": {
+            "description": "Pet successfully deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemovePetResponse"
+                }
+              }
+            }
           },
           "401": {
-            "description": "No authorization",
-            "content": {}
+            "description": "Not authorized"
           },
           "404": {
-            "description": "Not found",
-            "content": {}
-          },
-          "500": {
-            "description": "Server error",
-            "content": {}
+            "description": "Not found"
           }
         }
       }
@@ -1118,7 +1086,7 @@
             "example": "Kiev"
           },
 
-          "imageURL": {
+          "image": {
             "type": "string",
             "description": "User's image",
             "example": ""
@@ -1131,7 +1099,7 @@
           "phone": "+380936987452",
           "birthday": "01.03.2010",
           "city": "Kiev",
-          "imageURL": ""
+          "image": ""
         }
       },
       "LogoutResponse": {
@@ -1288,7 +1256,7 @@
           "title": "Притулок для бездомних тварин 'Сіріус'",
           "url": "https://dogcat.com.ua",
           "addressUrl": "https://goo.gl/maps/iq8NXEUf31EAQCzc6",
-          "imageUrl": "https://storage.googleapis.com/kidslikev2_bucket/pets-support/images/sponsors/frame_287.png",
+          "image": "",
           "address": "Fedorivka, Kyiv Oblast, Ukraine, 07372",
           "workDays": [
             {
@@ -1304,7 +1272,7 @@
       },
       "AddPetRequest": {
         "type": "object",
-        "required": ["name", "birthday", "breed", "imageURL"],
+        "required": ["name", "birthday", "breed", "image"],
         "properties": {
           "name": {
             "type": "string",
@@ -1326,10 +1294,10 @@
             "description": "comments",
             "example": "super doggy"
           },
-          "imageURL": {
-            "type": "string",
-            "description": "image your pet",
-            "example": "https://res.cloudinary.com/dsrjlhmr8/image/upload/v1672825045/acvvewo9t58ojoytnaks.jpg"
+          "image": {
+			"type": "string",
+            "description": "Pet`s photo (must be less than 3mb)",
+            "format": "binary"
           }
         },
         "example": {
@@ -1337,7 +1305,7 @@
           "birthday": "20.05.2020",
           "breed": "huski",
           "comments": "super doggy",
-          "imageURL": "https://res.cloudinary.com/dsrjlhmr8/image/upload/v1672825045/acvvewo9t58ojoytnaks.jpg"
+          "image": ""
         }
       },
       "AddPetResponse": {
@@ -1363,7 +1331,7 @@
             "description": "Pet breed",
             "example": "huski"
           },
-          "imageURL": {
+          "image": {
             "type": "string",
             "description": "image your pet",
             "example": ""
@@ -1394,7 +1362,7 @@
           "name": "Gori",
           "birthday": "20.05.2020",
           "breed": "huski",
-          "imageURL": "",
+          "image": "",
           "comments": "super doggy",
           "owner": "63b420f8613598919c6a71a8",
           "createdAt": "2023-01-04T09:37:25.604Z",
@@ -1448,7 +1416,7 @@
                   "description": "Pet breed",
                   "example": "huski"
                 },
-                "imageURL": {
+                "image": {
                   "type": "string",
                   "description": "image your pet",
                   "example": ""
@@ -1494,7 +1462,7 @@
                 "description": "User birthday",
                 "example": "05.05.2013"
               },
-              "imageURL": {
+              "image": {
                 "type": "string",
                 "description": "image your pet",
                 "example": "h"
@@ -1509,7 +1477,7 @@
               "name": "Ajaks",
               "birthday": "02.03.2003",
               "breed": "haski",
-              "imageURL": "",
+              "image": "",
               "comments": "adsgadgdagdg"
             }
           ],
@@ -1520,7 +1488,7 @@
             "city": "lviv",
             "phone": "+380936945352",
             "birthday": "20.05.2013",
-            "imageURL": ""
+            "image": ""
           }
         }
       },
@@ -1552,7 +1520,7 @@
             "description": "User location",
             "example": "Kyiv"
           },
-          "imageURL": {
+          "image": {
             "type": "string",
             "format": "binary",
             "description": "User avatar",
@@ -1564,7 +1532,7 @@
           "email": "test@gmail.com",
           "phone": "+380936945352",
           "city": "Kyiv",
-          "imageURL": "imege.jpg",
+          "image": "imege.jpg",
           "birthday": "20.03.2021"
         }
       },
