@@ -37,5 +37,5 @@ const servicesSchema = new Schema(
 
 servicesSchema.post("save", handleMongooseError);
 
-const Services = model("services", servicesSchema);
+const Services = model("sponsors", servicesSchema);
 module.exports = { Services };
