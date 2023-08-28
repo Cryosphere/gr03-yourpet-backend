@@ -290,165 +290,186 @@
       }
     },
 
-    "/user/pets": {
-      "post": {
+     "/user/info": {
+      "patch": {
         "tags": ["User"],
-        "summary": "Add User's pet",
-        "description": "Add User's pet",
-        "parameters": [],
+        "summary": "Update user data",
+        "description": "Update the user information with the provided fields. Requires authentication token.",
         "security": [{ "Bearer": [] }],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Bearer token",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIi..."
+            }
+          }
+        ],
         "requestBody": {
-          "description": "Pets object",
-          "required": true,
+          "description": "Update user object",
           "content": {
-            " multipart/form-data": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/AddPetRequest"
+                "$ref": "#/components/schemas/UpdateUserImgRequest"
               }
             }
           }
         },
         "responses": {
-          "201": {
-            "description": "Create new pet",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AddPetResponse"
-                }
-              }
-            }
+          "200": {
+            "description": "Successful operation",
+            "content": {}
           },
           "400": {
             "description": "Bad request",
             "content": {}
           },
           "401": {
-            "description": "Not authorized. Please, provide a token",
+            "description": "Not authorized",
             "content": {}
           },
-          "403": {
-            "description": "Invalid token",
+          "409": {
+            "description": "Email in use",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
             "content": {}
           }
         }
       }
     },
-    "/user/pets/{id}": {
-      "delete": {
-        "tags": ["User"],
-        "summary": "Delete User's pet",
-        "description": "Delete User's pet",
+
+    "/user/pets": {
+      "get": {
+        "summary": "Get user's pets",
+        "description": "Get user's pets. Requires authentication token.",
+        "tags": ["Pets"],
+        "security": [{ "Bearer": [] }],
         "parameters": [
           {
-            "name": "myPetId",
-            "in": "path",
-            "description": "User's pet id",
+            "in": "header",
+            "name": "Authorization",
+            "description": "Bearer token",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string",
+              "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIi..."
+            }
           }
+          
         ],
-        "security": [{ "Bearer": [] }],
         "responses": {
           "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RemovePetResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Not valid ID",
+            "description": "Successful operation",
             "content": {}
           },
           "401": {
-            "description": "Not authorized. Please, provide a token",
+            "description": "Not authorized",
             "content": {}
           },
-          "403": {
-            "description": "Invalid token",
-            "content": {}
-          },
-          "404": {
-            "description": "Failure, pet with ID not found",
-            "content": {}
-          }
-        }
-      }
-    },
-    "/user": {
-      "get": {
-        "tags": ["User"],
-        "summary": "Get User's info with his pets",
-        "description": "Get User's info with his pets",
-        "parameters": [],
-        "security": [{ "Bearer": [] }],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetUserInfoResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request",
-            "content": {}
-          },
-          "401": {
-            "description": "Not authorized. Please, provide a token",
-            "content": {}
-          },
-          "403": {
-            "description": "Invalid token",
+          "500": {
+            "description": "Server error",
             "content": {}
           }
         }
       },
-      "patch": {
-        "tags": ["User"],
-        "summary": "Update user info",
-        "description": "Update user info",
-        "parameters": [],
+      "post": {
+        "summary": "Add user's pet",
+        "description": "Add user's pet. Requires authentication token.",
+        "tags": ["Pets"],
         "security": [{ "Bearer": [] }],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Bearer token",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIi..."
+            }
+          }
+        ],
         "requestBody": {
-          "description": "User's object",
+          "description": "New pet's data object",
           "required": true,
           "content": {
             "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateUserRequest"
+                "$ref": "#/components/schemas/CreatePetRequest"
               }
             }
           }
         },
+
         "responses": {
-          "200": {
-            "description": "Saccses",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UpdateUserResponse"
-                }
-              }
-            }
+          "201": {
+            "description": "Successful operation",
+            "content": {}
           },
           "400": {
-            "description": "Bad request",
+            "description": "Bad request (invalid request body)",
             "content": {}
           },
           "401": {
-            "description": "Not authorized.Please,provide a token",
+            "description": "Not authorized",
             "content": {}
           },
-          "403": {
-            "description": "Invalid token",
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      }
+    },
+
+    "/pets/{petId}": {
+      "delete": {
+        "summary": "Delete user's pet",
+        "description": "Delete user's pets. Requires authentication token.",
+        "tags": ["Pets"],
+        "security": [{ "Bearer": [] }],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Bearer token",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIi..."
+            }
+          },
+          {
+            "in": "path",
+            "name": "petId",
+            "description": "ID of the notice to get",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "645e533389827094770e41f1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {}
+          },
+          "401": {
+            "description": "No authorization",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
             "content": {}
           }
         }
