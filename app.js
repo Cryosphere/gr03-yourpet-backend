@@ -31,7 +31,6 @@ app.use("/api/user", userRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
-  console.log("s;lkdfjslkdfj");
 });
 
 app.use((err, req, res, next) => {
