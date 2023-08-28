@@ -24,7 +24,7 @@ const myPetSchema = new Schema(
       minLength: 2,
       maxLength: 16,
     },
-    imageURL: {
+    image: {
       type: String,
       default:
         "https://res.cloudinary.com/dzbevpbos/image/upload/v1684832832/default-pets_z1kxoq_elq6gv.png",
@@ -67,7 +67,7 @@ const addMyPetSchema = Joi.object({
     "string.empty": `"breed" cannot be an empty field`,
     "any.required": `"breed" is a required field`,
   }),
-  imageURL: Joi.string().optional(),
+  image: Joi.string().optional(),
   comments: Joi.string().min(8).max(1000).messages({
     "string.base": `"comments" should be a type of 'text'`,
     "any.required": `"comments" is a required field`,

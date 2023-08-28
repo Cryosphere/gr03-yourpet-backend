@@ -43,7 +43,7 @@ const userSchema = new Schema(
       default: "",
       match: cityRegexp,
     },
-    imageURL: {
+    image: {
       type: String,
       default:
         "https://res.cloudinary.com/dzbevpbos/image/upload/v1684831673/Photo_default_pzeg2t.png",
@@ -116,7 +116,7 @@ const updateUserSchema = Joi.object({
   birthday: Joi.string().pattern(dateRegExp).optional(),
   phone: Joi.string().pattern(phoneRegexp).optional(),
   city: Joi.string().pattern(cityRegexp).optional(),
-  imageURL: Joi.string().optional(),
+  image: Joi.string().optional(),
 });
 
 const userSchemas = {

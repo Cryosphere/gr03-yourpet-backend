@@ -11,7 +11,7 @@ const { isValidId, authenticate, upload } = require("../../middlewares");
 router.post(
   "/pets",
   authenticate,
-  upload.single("imageURL"),
+  upload.single("image"),
   validateBody(schemas.addMyPetSchema),
   controllers.addMyPet
 );
@@ -28,7 +28,7 @@ router.get("/", authenticate, controllers.getAllInfo);
 router.patch(
   "/",
   authenticate,
-  upload.single("imageURL"),
+  upload.single("image"),
   validateBody(userSchemas.updateUserSchema),
   controllers.updateUser
 );

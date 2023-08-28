@@ -9,7 +9,7 @@ const getAllInfo = async (req, res, next) => {
     phone,
     birthday,
     city,
-    imageURL,
+    image,
     favorite,
   } = req.user;
   const pets = await MyPet.find({ owner }, "-createdAt -updatedAt -owner");
@@ -22,7 +22,7 @@ const getAllInfo = async (req, res, next) => {
       phone,
       birthday,
       city,
-      imageURL,
+      image,
       favorite,
     },
   });

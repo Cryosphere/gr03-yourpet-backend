@@ -3,8 +3,18 @@ const { MyPet } = require("../../models");
 const { HttpError } = require("../../helpers");
 
 const removeMyPetById = async (req, res, next) => {
-  const { id } = req.params;
-  const result = await MyPet.findByIdAndDelete(id);
+  const { id: petId } = req.params;
+  const { _id: userId } = req.user;
+
+  removePet = async (petId, userId) => {
+    try {
+      return await Pet.findOneAndDelete({ id: petId, owner: userId });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const result = await MyPet.findByIdAndDelete(petId);
   if (!result) {
     throw HttpError(404, "Not found");
   }

@@ -8,7 +8,7 @@ const updateUser = async (req, res) => {
   let updatedFields = { ...req.body };
   if (req.file) {
     const imageURL = await cloudinaryAddImage(req.file.path);
-    updatedFields.imageURL = imageURL.secure_url;
+    updatedFields.image = imageURL.secure_url;
   }
 
   const user = await User.findByIdAndUpdate(_id, updatedFields, {
@@ -17,7 +17,7 @@ const updateUser = async (req, res) => {
 
   res.status(200).json({
     user: {
-      imageURL: user.imageURL,
+      image: user.image,
       userInfo: {
         name: user.name,
         email: user.email,
