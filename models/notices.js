@@ -99,9 +99,9 @@ const addSchema = Joi.object({
     "string.empty": `"breed" cannot be empty`,
   }),
 
-  file: Joi.string().messages({
+  image: Joi.string().messages({
     "any.required": `missing required "photo"`,
-    "string.empty": `"file" cannot be empty`,
+    "string.empty": `"image" cannot be empty`,
   }),
   sex: Joi.string()
     .valid(...sexOptions)
