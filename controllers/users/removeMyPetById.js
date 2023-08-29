@@ -3,22 +3,16 @@ const { MyPet } = require("../../models");
 const { HttpError } = require("../../helpers");
 
 const removeMyPetById = async (req, res, next) => {
-  const { id: petId } = req.params;
+ try {
+    const { id: petId } = req.params;
   const { _id: userId } = req.user;
-
-  removePet = async (petId, userId) => {
-    try {
-      return await Pet.findOneAndDelete({ id: petId, owner: userId });
+ const result = await MyPet.findOneAndDelete({ id: petId, owner: userId });
+  res.status(200).json({ message: "pet has been deleted", id });
+   return result;
     } catch (error) {
       console.log(error);
-    }
-  };
-
-  const result = await MyPet.findByIdAndDelete(petId);
-  if (!result) {
-    throw HttpError(404, "Not found");
-  }
-  res.status(200).json({ message: "pet has been deleted", id });
+      throw HttpError(404, "Not found");
+ }
 };
 
 module.exports = { removeMyPetById: ctrlWrapper(removeMyPetById) };
