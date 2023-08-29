@@ -7,15 +7,21 @@ const addNoticeToFavorites = async (req, res) => {
   const { _id } = req.user;
   const user = await User.findById(_id);
   if (!user) {
-    throw HttpError(404, `User with  id "${id}" not found `);
+    throw HttpError(404, `User with  id "${_id}" not found `);
   }
-  if (user.favorite.includes(id)) {
+  if (user.find({ favorite: id })) {
     throw HttpError(
       409,
       `Notices with id "${id}" is already been added to your favorite`
     );
   }
-  user.favorite.unshift(id);
+  user.findByIdAndUpdate(
+    _id,
+    {
+      $push: { favorite: { $each: [id], $position: 0 } },
+    },
+    { new: true }
+  );
   await user.save();
   res.status(200).json({
     id: `${id}`,
