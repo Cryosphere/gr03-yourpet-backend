@@ -9,7 +9,7 @@ const addNoticeToFavorites = async (req, res) => {
   if (!user) {
     throw HttpError(404, `User with  id "${_id}" not found `);
   }
-  if (user.find({ favorite: id })) {
+  if (User.find({ favorite: id })) {
     throw HttpError(
       409,
       `Notices with id "${id}" is already been added to your favorite`
