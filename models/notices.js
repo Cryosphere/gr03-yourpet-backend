@@ -43,9 +43,9 @@ const noticesSchema = new Schema(
       minLength: 2,
       maxLength: 16,
     },
-    file: {
+    image: {
       type: String,
-      required: [true, "Set file for notices"],
+      required: [true, "Set image for notices"],
     },
     sex: {
       type: String,

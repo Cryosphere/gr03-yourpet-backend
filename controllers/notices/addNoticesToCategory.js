@@ -9,7 +9,7 @@ const addNoticesToCategory = async (req, res) => {
   const result = await Notices.create({
     ...req.body,
     owner: _id,
-    file: file.secure_url,
+    image: file.secure_url,
   });
   if (!result) {
     throw HttpError(400, `Bad request`);
