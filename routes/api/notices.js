@@ -11,7 +11,7 @@ const { authenticate, upload, isValidId } = require("../../middlewares");
 router.post(
   "/",
   authenticate,
-  upload.single("file"),
+  upload.single("image"),
   validateBody(schemasNotices.addSchema),
   notices.addNoticesToCategory
 );
