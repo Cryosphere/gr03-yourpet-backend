@@ -16,7 +16,7 @@ const userSchema = new Schema(
     name: {
       type: String,
       match: nameRegexp,
-      required: [true, "Email is required"],
+      required: [true, "Name is required"],
     },
     email: {
       type: String,
