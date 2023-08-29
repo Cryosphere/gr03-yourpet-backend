@@ -560,7 +560,7 @@
         }
       }
     },
-    "/notices/{id}": {
+    "/notices/:id": {
       "get": {
         "tags": ["Notices"],
         "summary": "Get one notice by ID",
@@ -792,7 +792,7 @@
         }
       }
     },
-    "/notices/favorites/add/{id}": {
+    "/notices/favorites/add/:id": {
       "patch": {
         "tags": ["Notices"],
         "summary": "Add notice to favorites",
@@ -801,7 +801,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "User Id",
+            "description": "Notice Id",
             "required": true,
             "type": "string"
           }
@@ -852,7 +852,7 @@
         }
       }
     },
-    "/notices/favorites/remove/{id}": {
+    "/notices/favorites/remove/:id": {
       "patch": {
         "tags": ["Notices"],
         "summary": "Remove notice favorites",
@@ -861,7 +861,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "User Id",
+            "description": "Notice Id",
             "required": true,
             "type": "string"
           }
@@ -1295,7 +1295,7 @@
             "example": "super doggy"
           },
           "image": {
-			"type": "string",
+			      "type": "string",
             "description": "Pet`s photo (must be less than 3mb)",
             "format": "binary"
           }
@@ -1542,9 +1542,10 @@
           "user": {
             "type": "object",
             "properties": {
-              "imageURL": {
+              "image": {
                 "type": "string",
-                "description": "User name",
+                "format":"binary",
+                "description": "User avatar",
                 "example": ""
               },
               "userInfo": {
@@ -1582,7 +1583,7 @@
         },
         "example": {
           "user": {
-            "imageURL": "",
+            "image": "",
             "userInfo": {
               "name": "Denis",
               "email": "Vital@gmail.com",
@@ -1596,7 +1597,7 @@
 
       "NoticeAddRequest": {
         "type": "object",
-        "required": ["category", "title", "date", "name", "breed", "file", "sex", "location"],
+        "required": ["category", "title", "date", "name", "breed", "image", "sex", "location"],
         "properties": {
           "category": {
             "type": "string",
@@ -1638,8 +1639,9 @@
             "description": "Price",
             "example": 5000
           },
-          "file": {
+          "image": {
             "type": "string",
+            "format":"binary",
             "description": "Pet image",
             "example": "image.jpg"
           },
@@ -1658,7 +1660,7 @@
           "sex": "female",
           "location": "Kyiv,Ukraine",
           "price": 5000,
-          "file": "image.jpg",
+          "image": "image.jpg",
           "comments": "Selling an awesome puppy"
         }
       },
@@ -1710,8 +1712,9 @@
             "description": "Price",
             "example": 5000
           },
-          "file": {
+          "image": {
             "type": "string",
+            "format":"binary",
             "description": "Pet image",
             "example": ""
           },
@@ -1736,7 +1739,7 @@
           "sex": "male",
           "location": "Kyiv",
           "price": 5000,
-          "imageURL": "",
+          "image": "",
           "comments": "Selling an awesome puppy",
           "owner": "63b420f8613598919c6a71a8"
         }
@@ -1793,7 +1796,7 @@
                   "description": "Price",
                   "example": 5000
                 },
-                "file": {
+                "image": {
                   "type": "string",
                   "description": "Pet image",
                   "example": ""
@@ -1834,7 +1837,7 @@
               "sex": "male",
               "location": "Kharkiv",
               "price": 2000,
-              "imageURL": "",
+              "image": "",
               "comments": "Help me find my sweetheart!",
               "owner": "63b58e631b6aab70d0834284"
             }
@@ -1936,8 +1939,9 @@
                   "description": "Price",
                   "example": 5000
                 },
-                "file": {
+                "image": {
                   "type": "string",
+                  "format":"binary",
                   "description": "Pet image",
                   "example": ""
                 },
@@ -1977,7 +1981,7 @@
               "sex": "male",
               "location": "Kharkiv",
               "price": 2000,
-              "imageURL": "",
+              "image": "",
               "comments": "Help me find my sweetheart!",
               "owner": "63b58e631b6aab70d0834284"
             }
@@ -2038,7 +2042,7 @@
                   "description": "Price",
                   "example": 5000
                 },
-                "file": {
+                "image": {
                   "type": "string",
                   "description": "Pet image",
                   "example": ""
@@ -2184,7 +2188,7 @@
           "sex": "female",
           "location": "Kyiv",
           "price": 5000,
-          "file": "https://animals.pibig.info/uploads/posts/2023-04/thumbs/1680657056_animals-pibig-info-p-krisa-porodi-dambo-zhivotnie-instagram-6.jpg",
+          "image": "https://animals.pibig.info/uploads/posts/2023-04/thumbs/1680657056_animals-pibig-info-p-krisa-porodi-dambo-zhivotnie-instagram-6.jpg",
           "comments": "sads  axfv  asxvc  gfdhgfjhkfjgfhgdfdyrejfhh",
           "owner": {
             "id": "63b420f8613598919c6a71a8",
