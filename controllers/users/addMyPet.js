@@ -13,11 +13,10 @@ const addMyPet = async (req, res) => {
     } else {
       image = "";
     }
-    console.log(image);
     const result = await MyPet.create({ ...req.body, image, owner });
     res.status(201).json(result);
   } catch (error) {
-    console.error("Update petAvatar error:", error);
+    console.error("Update pet avatar error:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
