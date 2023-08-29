@@ -792,7 +792,7 @@
         }
       }
     },
-    "/notices/favorites/add/{id}": {
+    "/notices/favorites/add/:id": {
       "patch": {
         "tags": ["Notices"],
         "summary": "Add notice to favorites",
@@ -852,7 +852,7 @@
         }
       }
     },
-    "/notices/favorites/remove/{id}": {
+    "/notices/favorites/remove/:id": {
       "patch": {
         "tags": ["Notices"],
         "summary": "Remove notice favorites",
@@ -1295,7 +1295,7 @@
             "example": "super doggy"
           },
           "image": {
-			"type": "string",
+			      "type": "string",
             "description": "Pet`s photo (must be less than 3mb)",
             "format": "binary"
           }
@@ -1596,7 +1596,7 @@
 
       "NoticeAddRequest": {
         "type": "object",
-        "required": ["category", "title", "date", "name", "breed", "file", "sex", "location"],
+        "required": ["category", "title", "date", "name", "breed", "image", "sex", "location"],
         "properties": {
           "category": {
             "type": "string",
@@ -1638,8 +1638,9 @@
             "description": "Price",
             "example": 5000
           },
-          "file": {
+          "image": {
             "type": "string",
+            "format":"binary",
             "description": "Pet image",
             "example": "image.jpg"
           },
@@ -1658,7 +1659,7 @@
           "sex": "female",
           "location": "Kyiv,Ukraine",
           "price": 5000,
-          "file": "image.jpg",
+          "image": "image.jpg",
           "comments": "Selling an awesome puppy"
         }
       },
