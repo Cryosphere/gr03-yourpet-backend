@@ -708,7 +708,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
+                  "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/GetUserNoticesResponse"
                   }
@@ -2083,9 +2083,10 @@
               "sex": "male",
               "location": "Kharkiv",
               "price": 2000,
-              "imageURL": "",
-              "comments": "Help me find my sweetheart!",
-              "owner": "63b58e631b6aab70d0834284"
+              "owner": "64eda450cd29fa7f02b0e619",
+              "createdAt": "2023-08-29T21:03:32.966Z",
+              "updatedAt": "2023-08-29T21:03:32.966Z",
+              "image": "https://res.cloudinary.com/dzmcgfrq3/image/upload/v1693343012/rd3m3dqygorqncjv0wcx.png"
             }
           ],
           "totalPages": 1, 
