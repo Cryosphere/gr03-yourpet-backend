@@ -406,7 +406,7 @@
       }
     },
 
-    "/user/pets/:petId": {
+    "/user/pets/{petId}": {
       "delete": {
         "tags": ["User"],
         "security": [{ "Bearer": [] }],
@@ -560,7 +560,7 @@
         }
       }
     },
-    "/notices/:id": {
+    "/notices/{id}": {
       "get": {
         "tags": ["Notices"],
         "summary": "Get one notice by ID",
@@ -792,7 +792,7 @@
         }
       }
     },
-    "/notices/favorites/add/:id": {
+    "/notices/favorites/add/{id}": {
       "patch": {
         "tags": ["Notices"],
         "summary": "Add notice to favorites",
@@ -852,7 +852,7 @@
         }
       }
     },
-    "/notices/favorites/remove/:id": {
+    "/notices/favorites/remove/{id}": {
       "patch": {
         "tags": ["Notices"],
         "summary": "Remove notice favorites",
