@@ -7,7 +7,7 @@ const getNotices = async (req, res) => {
   const skip = (page - 1) * limit;
 
   if (!category) {
-    throw new HttpError(
+    throw HttpError(
       400,
       "Missing required parameter of category. Must include sell, lost-found, or for-free"
     );
