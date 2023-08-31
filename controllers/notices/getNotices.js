@@ -9,7 +9,7 @@ const getNotices = async (req, res) => {
   if (!category) {
     throw HttpError(
       400,
-      "Missing required parameter of category. Must include sell, lost-found, or for-free"
+      "Missing required parameter of category. Must include sell, lost/found, or for-free"
     );
   }
 
