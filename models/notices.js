@@ -2,7 +2,7 @@ const Joi = require("joi");
 const { Schema, model } = require("mongoose");
 const { handleMongooseError } = require("../utils");
 
-const categories = ["sell", "lost-found", "for-free"];
+const categories = ["sell", "lost/found", "for-free"];
 const dateRegexp =
   /^\s*(3[01]|[12][0-9]|0?[1-9])\.(1[012]|0?[1-9])\.((?:19|20)\d{2})\s*$/;
 const sexOptions = ["male", "female"];
